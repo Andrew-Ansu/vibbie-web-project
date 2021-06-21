@@ -14,7 +14,7 @@ function include_page_header($page_title){
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand mx-5" href="#">Ansu Medicine Center</a>
+      <a class="navbar-brand mx-5" href="index.php">Ansu Medicine Center</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,14 +25,12 @@ function include_page_header($page_title){
             <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item active">
-          <a class="nav-link" href="">About</a>
+          <a class="nav-link" href="dosages.php">Dosages</a>
           </li>
           <li class="nav-item active">
           <a class="nav-link" href="">Contact</a>
           </li>
-          <li class="nav-item active">
-          <a class="nav-link" href="">FAQ</a>
-          </li>
+       
         
           <li class="nav-item">
             <a class="nav-link text-danger" href="logout.php">Logout</a>

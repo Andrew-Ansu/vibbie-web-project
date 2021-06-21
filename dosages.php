@@ -6,7 +6,7 @@ if (!isset($_SESSION['loggedIn'])) {
     header("location: login.php");
 }else{
 
-    $query = "SELECT * FROM medicine WHERE user_ID = " . $_SESSION['user_id'] . "";
+$query = "SELECT * FROM medicine WHERE user_ID = " . $_SESSION['user_id'] . "";
 $result = mysqli_query($con, $query);
 
 $user_id = intval($_SESSION["user_id"]);
@@ -32,6 +32,23 @@ if (isset($_POST["btn_save_dosage"])) {
     }else{
         echo '<h4 class="text-danger text-center">Internal Server Error</h4>';
     }
+}
+
+if(isset($_GET["delete_dosage"]) && $_GET["delete_dosage"] == true && isset($_GET["dosage_id"]))
+{
+  $dosage_id =intval($_GET["dosage_id"]);
+        
+  $query = "DELETE FROM tbl_dosages WHERE dosage_id = ?";
+  if($stmt = $con->prepare($query)){
+    $stmt->bind_param("i",$dosage_id);
+    if($stmt->execute()){
+      echo '<h5 class="display-4 text-center">Dosage Deleted Successfuully</h5>';
+      header("location: dosages.php");
+    }else{
+      echo '<h5 class="display-4">Error Deleting Record. Try Again</h5>';
+    }
+  }
+
 }
 
 
@@ -83,8 +100,8 @@ if (isset($_POST["btn_save_dosage"])) {
                                 <small>'.$row["medicine_name"].'</small>
                                 <small>'.$row["date_taken"].'</small>
                                 <small>'.$row["time_taken"].'</small>
-                                <a href="" class="btn btn-info">Edit</a>
-                                <a href="" class="btn btn-danger">Delete</a>
+                                <a href="?edit_dosage=true&dosage_id='.$row["dosage_id"].'" class="btn btn-info">Edit</a>
+                                <a href="?delete_dosage=true&dosage_id='.$row["dosage_id"].'" class="btn btn-danger">Delete</a>
                             </li>';
                             echo "<br>";
                         }
